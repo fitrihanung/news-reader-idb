@@ -9,10 +9,13 @@ var urlsToCache = [
   "/pages/home.html",
   "/pages/about.html",
   "/pages/contact.html",
+  "/pages/saved.html",
   "/css/materialize.min.css",
   "/js/materialize.min.js",
   "/js/api.js",
-  "/js/nav.js"
+  "/js/nav.js",
+  "/js/idb.js",
+  "/js/db.js"
 ];
 
 self.addEventListener("install", function(event) {
