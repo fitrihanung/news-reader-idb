@@ -11,10 +11,38 @@ function saveForLater(article) {
     var tx = db.transaction("articles", "readwrite");
     var store = tx.objectStore("articles");
     console.log(article);
-    store.add(article.result);
+    store.put(article.result);
     return tx.complete;
   })
   .then(function() {
     console.log("article berhasil di simpan");
+  });
+}
+
+function getAll() {
+  return new Promise(function(resolve, reject) {
+    dbPromised
+    .then(function(db) {
+      var tx = db.transaction("articles", "readonly");
+      var store = tx.objectStore("articles");
+      return store.getAll();
+    })
+    .then(function(articles) {
+      resolve(articles);
+    });
+  });
+}
+
+function getById(id) {
+  return new Promise(function(resolve, reject) {
+    dbPromised
+    .then(function(db) {
+      var tx = db.transaction("articles", "readonly");
+      var store = tx.objectStore("articles");
+      return store.get(id);
+    })
+    .then(function(article) {
+      resolve(article);
+    });
   });
 }

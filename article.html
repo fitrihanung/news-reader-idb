@@ -59,14 +59,27 @@
 
       //request api untuk pertama kali
       document.addEventListener("DOMContentLoaded", function() {
-        var item = getArticleById();
-        var save = document.getElementById("save");
-        save.onclick = function() {
-          console.log("Tombol FAB di klik");
+        var urlParams = new URLSearchParams(window.location.search);
+        var isFromSaved = urlParams.get("saved");
+
+        var btnSave = document.getElementById("save");
+
+        if (isFromSaved) {
+          //hide fab jika dimuat dari indexed db
+          btnSave.style.display = "none";
+
+          //ambil artikel lalu tampilkan
+          getSavedArticleById();
+        } else {
+          var item = getArticleById();
+        }
+
+        btnSave.onclick = function() {
+          console.log("Tombol FAB di klik.");
           item.then(function(article) {
             saveForLater(article);
           });
-        }
+        };
       });
     </script>
   </body>
